@@ -1,22 +1,32 @@
-import express, { Response, Request } from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import express from "express";
+import { connectToDB } from "./db";
+import env from "../config/env";
+import shortUrlRouter from "./shorturl/shorturl.router";
+import ShortUrlModel from "./shorturl/shorturl.model";
 
-dotenv.config();
-
-const PORT = process.env.PORT;
+const PORT = env.get("PORT");
 const app = express();
 
-app.use(cors({ optionsSuccessStatus: 200 }));
 app.use(express.static("public"));
+app.set("views", "./views");
+app.set("view engine", "pug");
 
-app.post("/api/shorturl", (req: Request, res: Response) => {
-  res.status(404)
-  res.json({
-    message: "This service is being developed."
+app.use(cors({ optionsSuccessStatus: 200 }));
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
   })
+);
+
+app.get("/", async (req, res) => {
+  const urls = await ShortUrlModel.find({});
+  res.render("index", { urls });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Listening on http://localhost:${PORT}`);
+  await connectToDB();
+  app.use("/api/shorturl", shortUrlRouter);
 });

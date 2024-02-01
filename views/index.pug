@@ -1,0 +1,38 @@
+html
+  head
+    title URL Shortener Microservice
+    link(rel='stylesheet' type='text/css' href='/styles.css')
+  body
+    h1 URL Shortener Microservice
+    h2 Short URL Creation
+    p 
+      | Example: 
+      | 
+      code POST [project_url]/api/shorturl
+      | 
+      | - 
+      | 
+      code https://www.google.com
+    main
+      section
+        form(action='api/shorturl' method='POST')
+          fieldset
+            legend URL Shortener
+            label(for='url_input') URL:
+            input(id='url_input' type="text" name="url" placeholder="https://www.freecodecamp.org/")
+            button(type='submit') Shorten
+
+      section.center
+        table
+          thead
+            tr 
+              th Original URL
+              th Short URL 
+              th Hit Count
+          tbody 
+            each url in urls
+              tr
+                td= url.original_url
+                td
+                  a(href='/api/shorturl/' + url.short_url target='_blank' rel='noopener noreferrer')= url.short_url
+                td= url.hit_count

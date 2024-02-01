@@ -1,34 +1,20 @@
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
   color: #222;
   background-color: #fafafa;
   text-align: center;
-  line-height: 1.4em;
-}
-
-.container {
-  padding: 0;
-  margin-top: 40px;
+  line-height: 1.2rem;
+  padding-top: 48px;
 }
 
 h3 {
   margin-top: 30px;
 }
 
-.footer {
-  margin-top: 40px;
-}
-
-.user-stories {
-  position: relative;
-  text-align: justify;
-  max-width: 700px;
-  margin: 15px auto;
-}
 code {
   font-family: monospace;
-  padding: 2px;
+  padding: 0.2rem;
   color: black;
   background-color: #fff;
 }
@@ -49,11 +35,33 @@ label {
   margin-right: 10px;
 }
 
-input {
-  padding: 5px;
+input,
+button {
+  padding: 0.225rem;
+}
+
+button {
+  margin-left: 0.5rem;
 }
 
 input[type="text"] {
   width: 220px;
   text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: left;
+}
+
+td,
+th {
+  border: 1px solid black;
+  padding: 10px 20px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
