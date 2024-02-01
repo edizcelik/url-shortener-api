@@ -21,9 +21,7 @@ export async function createShortUrl(
       original_url: req.body.url,
     });
 
-    res.json({
-      data: newShortUrl.toJSON(),
-    });
+    res.json(newShortUrl.toJSON());
   } catch (error: any) {
     res.status(400);
     res.json({
