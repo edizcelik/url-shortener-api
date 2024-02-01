@@ -17,8 +17,7 @@
     "express": "^4.18.2",
     "mongoose": "^8.1.1",
     "nanoid": "^3.3.7",
-    "pug": "^3.0.2",
-    "zod": "^3.22.4"
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

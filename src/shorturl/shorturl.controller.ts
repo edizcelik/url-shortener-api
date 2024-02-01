@@ -1,12 +1,16 @@
 import { Request, Response } from "express";
-import { CreateShortUrlInput } from "./shorturl.validationSchema";
 import ShortUrlModel from "./shorturl.model";
+import { isValidURL } from "../util/url.utils";
 
 export async function createShortUrl(
-  req: Request<{}, {}, CreateShortUrlInput["body"]>,
+  req: Request<{}, {}, { url: string }>,
   res: Response
 ) {
   try {
+    if (!isValidURL(req.body.url)) {
+      throw new Error("invalid url");
+    }
+
     const shortUrl = await ShortUrlModel.findOne({
       original_url: req.body.url,
     });
@@ -24,9 +28,7 @@ export async function createShortUrl(
     res.json(newShortUrl.toJSON());
   } catch (error: any) {
     res.status(400);
-    res.json({
-      message: error.message,
-    });
+    res.json({ error: error.message });
   }
 }
 
